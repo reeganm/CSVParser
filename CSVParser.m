@@ -4,29 +4,28 @@ classdef CSVParser<handle
     
     properties
         string = [];
-        delimiter = ',';
+        delimiter = [];
         data = [];
     end
     
     methods
         function obj=CSVParser()
-            obj;
+            obj.delimiter = ',';
         end
         
         function obj=parse(obj)
             obj.data = [];
-            split_string = strsplit(obj.string,obj.delimiter)
+            split_string = strsplit(obj.string,obj.delimiter);
             for i = [1:length(split_string)]
-                obj.data = [ obj.data str2num(split_string{i}) ]
+                obj.data = [ obj.data str2num(split_string{i}) ];
             end
         end
         
         function obj=build(obj)
             obj.string = [];
-            obj.string = sprintf('%d,',obj.data);
+            format = strcat('%d',obj.delimiter);
+            obj.string = sprintf(format,obj.data);
             obj.string = obj.string(1:length(obj.string)-1);
         end
     end
-    
 end
-
